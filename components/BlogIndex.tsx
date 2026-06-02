@@ -7,9 +7,11 @@ import { mapPageUrl } from '@/lib/map-page-url'
 import { mapImageUrl } from '@/lib/map-image-url'
 import { MoonIcon } from '@/lib/icons/moon'
 import { SunIcon } from '@/lib/icons/sun'
+import * as config from '@/lib/config'
 import { type Site } from '@/lib/types'
 import { useDarkMode } from '@/lib/use-dark-mode'
 import { Footer } from './Footer'
+import { PageHead } from './PageHead'
 import { SearchModal } from './SearchModal'
 import styles from './BlogIndex.module.css'
 
@@ -132,7 +134,34 @@ export function BlogIndex({ site, recordMap }: Props) {
   const { isDarkMode } = useDarkMode()
   const posts = extractPosts(recordMap, site)
 
+  const siteUrl = `https://${site.domain}`
+
   return (
+    <>
+    <PageHead
+      site={site}
+      title={site.name}
+      description={site.description}
+      url={siteUrl}
+    />
+    {/* 메인 페이지 JSON-LD */}
+    <script
+      type='application/ld+json'
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Blog',
+          name: site.name,
+          description: site.description,
+          url: siteUrl,
+          author: {
+            '@type': 'Person',
+            name: config.author
+          },
+          inLanguage: 'ko-KR'
+        })
+      }}
+    />
     <div className={`${styles.root} ${isDarkMode ? styles.dark : ''}`}>
       {/* 모바일 전용 sticky 헤더 */}
       <div className={styles.mobileHeader}>
@@ -193,5 +222,6 @@ export function BlogIndex({ site, recordMap }: Props) {
 
       <Footer />
     </div>
+    </>
   )
 }
