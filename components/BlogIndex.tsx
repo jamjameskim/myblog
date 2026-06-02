@@ -42,7 +42,7 @@ function extractPosts(recordMap: ExtendedRecordMap, site: Site): Post[] {
     for (const viewId of Object.keys(query)) {
       const ids = (query[viewId] as any)?.collection_group_results?.blockIds
       if (Array.isArray(ids)) {
-        ids.forEach((id: string) => {
+        ;(ids as string[]).forEach((id: string) => {
           if (!pageIds.includes(id)) pageIds.push(id)
         })
         break
