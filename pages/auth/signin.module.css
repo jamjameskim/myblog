@@ -1,0 +1,99 @@
+.root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  padding: 24px;
+}
+
+.dark-mode .root {
+  background: #000;
+}
+
+.card {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px;
+  color: #1d1d1f;
+}
+
+.desc {
+  font-size: 15px;
+  color: #6e6e73;
+  margin: 0 0 32px;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: opacity 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.google {
+  background: #fff;
+  color: #1d1d1f;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.kakao {
+  background: #FEE500;
+  color: #3C1E1E;
+}
+
+.naver {
+  background: #03C75A;
+  color: #fff;
+}
+
+.naverN {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.back {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #6e6e73;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px;
+}
+
+.back:hover {
+  color: #1d1d1f;
+}

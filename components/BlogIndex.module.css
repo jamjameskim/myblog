@@ -82,8 +82,60 @@
 .siteDesc {
   font-size: 17px;
   color: #6e6e73;
-  margin: 0;
+  margin: 0 0 28px;
   line-height: 1.5;
+}
+
+.cta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  height: 44px;
+  padding: 0 20px;
+  background: #1d1d1f;
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.ctaPrimary:hover {
+  opacity: 0.75;
+}
+
+.dark .ctaPrimary {
+  background: #f5f5f7;
+  color: #1d1d1f;
+}
+
+.ctaSecondary {
+  height: 44px;
+  padding: 0 20px;
+  background: none;
+  color: #1d1d1f;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 22px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.ctaSecondary:hover {
+  opacity: 0.6;
+}
+
+.dark .ctaSecondary {
+  color: #f5f5f7;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .dark .siteDesc {

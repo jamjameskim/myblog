@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import * as React from 'react'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import { getBlockTitle, getPageProperty } from 'notion-utils'
 import { type ExtendedRecordMap } from 'notion-types'
 
@@ -130,6 +132,44 @@ function SearchButton({ className }: { className?: string }) {
   )
 }
 
+function CTAButtons() {
+  const { data: session } = useSession()
+  const router = useRouter()
+
+  const handleMakePage = () => {
+    if (!session) {
+      signIn(undefined, { callbackUrl: '/onboarding' })
+      return
+    }
+    const username = (session as any)?.username
+    if (username) {
+      router.push(`/${username}`)
+    } else {
+      router.push('/onboarding')
+    }
+  }
+
+  const handleSignIn = () => {
+    if (session) {
+      const username = (session as any)?.username
+      router.push(username ? `/${username}` : '/onboarding')
+    } else {
+      signIn(undefined, { callbackUrl: '/' })
+    }
+  }
+
+  return (
+    <div className={styles.cta}>
+      <button className={styles.ctaPrimary} onClick={handleMakePage}>
+        내 페이지 만들기
+      </button>
+      <button className={styles.ctaSecondary} onClick={handleSignIn}>
+        {session ? '내 페이지로' : '로그인'}
+      </button>
+    </div>
+  )
+}
+
 export function BlogIndex({ site, recordMap }: Props) {
   const { isDarkMode } = useDarkMode()
   const posts = extractPosts(recordMap, site)
@@ -184,6 +224,7 @@ export function BlogIndex({ site, recordMap }: Props) {
           {site.description && (
             <p className={styles.siteDesc}>{site.description}</p>
           )}
+          <CTAButtons />
         </div>
       </header>
 

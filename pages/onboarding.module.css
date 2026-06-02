@@ -1,0 +1,137 @@
+.root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  padding: 40px 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px;
+  color: #1d1d1f;
+}
+
+.desc {
+  font-size: 15px;
+  color: #6e6e73;
+  margin: 0 0 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1d1d1f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.manualLink {
+  font-size: 12px;
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.manualLink:hover {
+  opacity: 0.7;
+}
+
+.inputWrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.inputWrap:focus-within {
+  border-color: #0066cc;
+}
+
+.prefix {
+  padding: 0 10px;
+  font-size: 14px;
+  color: #6e6e73;
+  background: #f5f5f7;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1d1d1f;
+  outline: none;
+  transition: border-color 0.15s ease;
+  background: #fff;
+}
+
+.inputWrap .input {
+  border: none;
+  border-radius: 0;
+}
+
+.input:focus {
+  border-color: #0066cc;
+}
+
+.error {
+  font-size: 13px;
+  color: #ff3b30;
+  margin: 0;
+}
+
+.submit {
+  height: 48px;
+  background: #1d1d1f;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  margin-top: 4px;
+}
+
+.submit:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

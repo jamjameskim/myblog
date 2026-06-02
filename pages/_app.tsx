@@ -15,6 +15,7 @@ import 'styles/prism-theme.css'
 
 import type { AppProps } from 'next/app'
 import * as Fathom from 'fathom-client'
+import { SessionProvider } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { posthog } from 'posthog-js'
 import * as React from 'react'
@@ -61,5 +62,9 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, [router.events])
 
-  return <Component {...pageProps} />
+  return (
+    <SessionProvider session={(pageProps as any).session}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  )
 }
