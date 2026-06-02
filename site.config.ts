@@ -9,12 +9,12 @@ export default siteConfig({
   rootNotionSpaceId: null,
 
   // basic site info (required)
-  name: 'storyteller',
-  domain: 'myblogbasednotion.vercel.app',
-  author: 'James Kim',
+  name: 'Overlooked',
+  domain: 'over-looked.vercel.app',
+  author: 'Overlooked',
 
   // open graph metadata (optional)
-  description: '다양한 이야기를 소개합니다',
+  description: 'Stories hidden in plain sight. 지나쳐온 이야기들',
 
   // social usernames (optional)
   // twitter: '',
