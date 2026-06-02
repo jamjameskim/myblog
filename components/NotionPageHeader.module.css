@@ -1,0 +1,102 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+:global(.dark-mode) .header {
+  background: rgba(0, 0, 0, 0.82);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #1d1d1f;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.backLink:hover {
+  opacity: 0.6;
+}
+
+:global(.dark-mode) .backLink {
+  color: #f5f5f7;
+}
+
+.rhs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.iconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #1d1d1f;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+  border-radius: 8px;
+  padding: 0;
+}
+
+.iconBtn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.iconBtn:hover {
+  opacity: 1;
+}
+
+:global(.dark-mode) .iconBtn {
+  color: #f5f5f7;
+}
+
+/* react-notion-x 검색 버튼 크기 통일 */
+.rhs :global(.breadcrumb.button) {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+  border-radius: 8px;
+  padding: 0;
+}
+
+.rhs :global(.breadcrumb.button):hover {
+  opacity: 1;
+  background: none;
+}
+
+.rhs :global(.breadcrumb.button) svg {
+  width: 18px;
+  height: 18px;
+}

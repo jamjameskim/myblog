@@ -111,8 +111,10 @@ const Code = dynamic(() =>
   })
 )
 
-const Collection = dynamic(() =>
-  import('react-notion-x/third-party/collection').then((m) => m.Collection)
+const Collection = dynamic(
+  () =>
+    import('react-notion-x/third-party/collection').then((m) => m.Collection),
+  { ssr: false }
 )
 const Equation = dynamic(() =>
   import('react-notion-x/third-party/equation').then((m) => m.Equation)
@@ -179,6 +181,11 @@ const propertyTextValue = (
   { schema, pageHeader }: any,
   defaultFn: () => React.ReactNode
 ) => {
+  // Slug 프로퍼티는 본문에서 숨김
+  if (schema?.name?.toLowerCase() === 'slug') {
+    return null
+  }
+
   if (pageHeader && schema?.name?.toLowerCase() === 'author') {
     return <b>{defaultFn()}</b>
   }
@@ -189,6 +196,11 @@ const propertyTextValue = (
 const notionRendererComponents: Partial<NotionComponents> = {
   nextLegacyImage: Image,
   nextLink: Link,
+  PageLink: ({ href, children, ...props }: any) => (
+    <Link href={href ?? '/'} {...props}>
+      {children}
+    </Link>
+  ),
   Code,
   Collection,
   Equation,

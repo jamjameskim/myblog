@@ -9,7 +9,18 @@
 
 .notion {
   --notion-max-width: 720px;
-  --notion-header-height: 54px;
+  --notion-header-height: 52px;
+  --bg-color: #ffffff;
+  --bg-color-0: rgba(0, 0, 0, 0.04);
+  --bg-color-1: rgba(0, 0, 0, 0.06);
+  --bg-color-2: rgba(0, 0, 0, 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  background: #ffffff;
+}
+
+.dark-mode .notion {
+  --bg-color: #000000;
+  background: #000000;
 }
 
 .notion-frame {
@@ -162,33 +173,76 @@
 }
 
 .notion .notion-page-icon-cover {
-  margin-left: auto;
+  margin-left: 0;
   margin-right: auto;
 }
 
 .notion-title {
   display: block;
-  text-align: center;
+  text-align: left;
+  font-size: 2.2em;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
 }
 
 .notion-collection-row {
-  padding-bottom: 1em;
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
+.dark-mode .notion-collection-row {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 프로퍼티 라벨 숨김 */
 .notion-collection-page-properties .notion-collection-column-title {
   display: none;
 }
 
-.notion-collection-row-property .notion-property {
-  display: flex;
-  justify-content: center;
+/* 프로퍼티들 가로 나열 */
+.notion-collection-page-properties .notion-collection-row-body {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  flex-direction: row !important;
+  gap: 6px 12px !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+.notion-collection-row-property {
+  display: flex !important;
+  align-items: center !important;
 }
 
 .notion-collection-row-value {
-  display: flex;
-  align-items: center;
-  padding: 0;
-  min-height: 23px;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+  min-height: unset !important;
+  text-align: left !important;
+}
+
+/* 날짜 스타일 */
+.notion-property-date {
+  font-size: 13px !important;
+  color: #6e6e73 !important;
+  text-align: left !important;
+}
+
+.dark-mode .notion-property-date {
+  color: #86868b !important;
+}
+
+/* Description 프로퍼티 숨김 (목록 페이지에서만 사용) */
+.notion-collection-page-properties .notion-collection-row-property:has(.notion-property-text) {
+  display: none !important;
+}
+
+/* 빈 property 셀 숨김 (Slug 등) */
+.notion-collection-row-property:has(.notion-property:empty) {
+  display: none !important;
 }
 
 .notion-page-cover-wrapper,
@@ -196,6 +250,11 @@
 .notion-page-cover-wrapper img {
   max-width: 1200px !important;
   border-radius: 24px;
+}
+
+/* 커버 이미지 항상 중앙 고정 */
+.notion-page-cover-wrapper img {
+  object-position: center center !important;
 }
 
 .notion-page-cover-wrapper {
