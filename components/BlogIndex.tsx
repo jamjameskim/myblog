@@ -36,8 +36,9 @@ function extractPosts(recordMap: ExtendedRecordMap, site: Site): Post[] {
   const collectionQuery = recordMap.collection_query
   const pageIds: string[] = []
 
-  for (const collectionId of Object.keys(collectionQuery)) {
+  for (const collectionId of Object.keys(collectionQuery ?? {})) {
     const query = collectionQuery[collectionId]
+    if (!query) break
     for (const viewId of Object.keys(query)) {
       const ids = (query[viewId] as any)?.collection_group_results?.blockIds
       if (Array.isArray(ids)) {
