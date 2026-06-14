@@ -72,7 +72,7 @@ export default function SettingsPage({ username, initialTitle, initialSubtitle }
       body: JSON.stringify(form)
     })
 
-    const data = await res.json()
+    const data = await res.json() as { error?: string }
     setLoading(false)
 
     if (!res.ok) {

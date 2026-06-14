@@ -49,7 +49,7 @@ export default function OnboardingPage() {
       body: JSON.stringify({ ...form, notion_page_id })
     })
 
-    const data = await res.json()
+    const data = await res.json() as { error?: string }
     setLoading(false)
 
     if (!res.ok) {
