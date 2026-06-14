@@ -39,7 +39,9 @@ export function useDarkMode() {
         } else {
           document.documentElement.classList.remove('dark-mode')
         }
-        window.dispatchEvent(new CustomEvent(SYNC_EVENT, { detail: next }))
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent(SYNC_EVENT, { detail: next }))
+        }, 0)
       } catch {}
       return next
     })

@@ -57,5 +57,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(200).json(data)
   }
 
+  // 페이지 삭제
+  if (req.method === 'DELETE') {
+    const { error } = await supabase
+      .from('pages')
+      .delete()
+      .eq('user_id', user.id)
+
+    if (error) return res.status(500).json({ error: error.message })
+    return res.status(200).json({ ok: true })
+  }
+
   return res.status(405).json({ error: 'Method not allowed' })
 }

@@ -5,7 +5,7 @@ import type * as types from './types'
 import { api } from './config'
 
 export const searchNotion = pMemoize(searchNotionImpl, {
-  cacheKey: (args) => args[0]?.query,
+  cacheKey: (args) => `${args[0]?.query}__${args[0]?.ancestorId}`,
   cache: new ExpiryMap(10_000)
 })
 

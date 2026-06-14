@@ -1,7 +1,7 @@
 import { type ExtendedRecordMap } from 'notion-types'
 import { parsePageId, uuidToId } from 'notion-utils'
 
-import { includeNotionIdInUrls } from './config'
+import { domain as mainDomain, includeNotionIdInUrls } from './config'
 import { getCanonicalPageId } from './get-canonical-page-id'
 import { type Site } from './types'
 
@@ -13,12 +13,14 @@ export const mapPageUrl =
   (site: Site, recordMap: ExtendedRecordMap, searchParams: URLSearchParams) =>
   (pageId = '') => {
     const pageUuid = parsePageId(pageId, { uuid: true })!
+    const isUserBlog = site.domain !== mainDomain
+    const prefix = isUserBlog ? `/${site.domain}` : ''
 
     if (uuidToId(pageUuid) === site.rootNotionPageId) {
-      return createUrl('/', searchParams)
+      return createUrl(isUserBlog ? `/${site.domain}` : '/', searchParams)
     } else {
       return createUrl(
-        `/${getCanonicalPageId(pageUuid, recordMap, { uuid })}`,
+        `${prefix}/${getCanonicalPageId(pageUuid, recordMap, { uuid })}`,
         searchParams
       )
     }

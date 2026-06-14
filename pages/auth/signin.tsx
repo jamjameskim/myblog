@@ -8,7 +8,7 @@ export default function SignInPage() {
   const { callbackUrl } = router.query
 
   const handleSignIn = (provider: string) => {
-    signIn(provider, { callbackUrl: (callbackUrl as string) || '/' })
+    signIn(provider, { callbackUrl: (callbackUrl as string) || '/onboarding' })
   }
 
   return (

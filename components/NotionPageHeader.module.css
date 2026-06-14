@@ -14,33 +14,112 @@
 }
 
 .inner {
-  max-width: 720px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 24px;
-  height: 52px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.backLink {
+@media (max-width: 480px) {
+  .inner {
+    padding: 0 16px;
+    height: 52px;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner {
+    padding: 0 16px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .allListBtn {
+    font-size: 12px;
+    padding: 0 10px;
+  }
+
+  .logoutBtn {
+    font-size: 12px;
+    padding: 0 10px;
+  }
+}
+
+.lhs {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 12px;
+}
+
+.title {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
   color: #1d1d1f;
   text-decoration: none;
   transition: opacity 0.15s ease;
 }
 
-.backLink:hover {
+.title:hover {
   opacity: 0.6;
 }
 
-:global(.dark-mode) .backLink {
+:global(.dark-mode) .title {
   color: #f5f5f7;
+}
+
+.allListBtn {
+  height: 28px;
+  padding: 0 12px;
+  background: none;
+  color: #1d1d1f;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.15s ease;
+}
+
+.allListBtn:hover {
+  opacity: 0.6;
+}
+
+:global(.dark-mode) .allListBtn {
+  color: #f5f5f7;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.logoutBtn {
+  height: 28px;
+  padding: 0 12px;
+  background: none;
+  color: #1d1d1f;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  margin-left: 4px;
+}
+
+.logoutBtn:hover {
+  opacity: 0.6;
+}
+
+:global(.dark-mode) .logoutBtn {
+  color: #f5f5f7;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .rhs {
@@ -49,12 +128,108 @@
   gap: 0;
 }
 
+/* Profile menu */
+.profileWrap {
+  position: relative;
+  margin-left: 4px;
+}
+
+.profileBtn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s ease;
+}
+
+.profileBtn:hover {
+  opacity: 0.75;
+}
+
+.profileImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profileInitial {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #555;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:global(.dark-mode) .profileInitial {
+  background: #444;
+  color: #ddd;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  min-width: 140px;
+  overflow: hidden;
+  z-index: 200;
+}
+
+:global(.dark-mode) .dropdown {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  color: #1d1d1f;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s ease;
+}
+
+.dropdownItem:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark-mode) .dropdownItem {
+  color: #f5f5f7;
+}
+
+:global(.dark-mode) .dropdownItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
 .iconBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border: none;
   background: none;
   cursor: pointer;
@@ -66,8 +241,8 @@
 }
 
 .iconBtn svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 .iconBtn:hover {

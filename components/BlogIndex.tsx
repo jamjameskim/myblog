@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import * as React from 'react'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { getBlockTitle, getPageProperty } from 'notion-utils'
 import { type ExtendedRecordMap } from 'notion-types'
@@ -132,13 +132,13 @@ function SearchButton({ className }: { className?: string }) {
   )
 }
 
-function CTAButtons() {
+function CTAButtons({ mobile }: { mobile?: boolean }) {
   const { data: session } = useSession()
   const router = useRouter()
 
   const handleMakePage = () => {
     if (!session) {
-      signIn(undefined, { callbackUrl: '/onboarding' })
+      router.push('/auth/signin')
       return
     }
     const username = (session as any)?.username
@@ -158,6 +158,14 @@ function CTAButtons() {
     }
   }
 
+  if (mobile) {
+    return (
+      <button className={styles.ctaMobile} onClick={handleMakePage}>
+        내 페이지 만들기
+      </button>
+    )
+  }
+
   return (
     <div className={styles.cta}>
       <button className={styles.ctaPrimary} onClick={handleMakePage}>
@@ -172,7 +180,11 @@ function CTAButtons() {
 
 export function BlogIndex({ site, recordMap }: Props) {
   const { isDarkMode } = useDarkMode()
+  const { data: session, status } = useSession()
+  const router = useRouter()
   const posts = extractPosts(recordMap, site)
+  const isLoggedIn = status !== 'loading' && !!session
+  const username = (session as any)?.username
 
   const siteUrl = `https://${site.domain}`
 
@@ -184,7 +196,6 @@ export function BlogIndex({ site, recordMap }: Props) {
       description={site.description}
       url={siteUrl}
     />
-    {/* 메인 페이지 JSON-LD */}
     <script
       type='application/ld+json'
       dangerouslySetInnerHTML={{
@@ -194,39 +205,74 @@ export function BlogIndex({ site, recordMap }: Props) {
           name: site.name,
           description: site.description,
           url: siteUrl,
-          author: {
-            '@type': 'Person',
-            name: config.author
-          },
+          author: { '@type': 'Person', name: config.author },
           inLanguage: 'ko-KR'
         })
       }}
     />
     <div className={`${styles.root} ${isDarkMode ? styles.dark : ''}`}>
-      {/* 모바일 전용 sticky 헤더 */}
-      <div className={styles.mobileHeader}>
-        <span className={styles.mobileTitle}>{site.name}</span>
-        <div className={styles.mobileHeaderRhs}>
-          <SearchButton />
-          <ThemeToggle />
-        </div>
-      </div>
-
-      <header className={styles.header}>
-        <div className={styles.headerInner}>
-          <div className={styles.headerTop}>
-            <h1 className={styles.siteName}>{site.name}</h1>
-            <div className={styles.headerRhs}>
-              <SearchButton />
-              <ThemeToggle />
-            </div>
+      <>
+        {/* 모바일 전용 sticky 헤더 */}
+        <div className={styles.mobileHeader}>
+          <span className={styles.mobileTitle}>{site.name}</span>
+          <div className={styles.mobileHeaderRhs}>
+            <SearchButton />
+            <ThemeToggle />
+            {isLoggedIn ? (
+              <>
+                <button
+                  className={styles.ctaMobile}
+                  onClick={() => router.push(username ? `/${username}` : '/onboarding')}
+                >
+                  내 페이지로
+                </button>
+                <button
+                  className={styles.logoutBtnMobile}
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                >
+                  로그아웃
+                </button>
+              </>
+            ) : (
+              <CTAButtons mobile />
+            )}
           </div>
-          {site.description && (
-            <p className={styles.siteDesc}>{site.description}</p>
-          )}
-          <CTAButtons />
         </div>
-      </header>
+
+        {/* 데스크톱 헤더 */}
+        <header className={styles.header}>
+          <div className={styles.headerInner}>
+            <div className={styles.headerTop}>
+              <h1 className={styles.siteName}>{site.name}</h1>
+              <div className={styles.headerRhs}>
+                <SearchButton />
+                <ThemeToggle />
+              </div>
+            </div>
+            {site.description && (
+              <p className={styles.siteDesc}>{site.description}</p>
+            )}
+            {isLoggedIn ? (
+              <div className={styles.cta}>
+                <button
+                  className={styles.ctaPrimary}
+                  onClick={() => router.push(username ? `/${username}` : '/onboarding')}
+                >
+                  내 페이지로 이동
+                </button>
+                <button
+                  className={styles.ctaSecondary}
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                >
+                  로그아웃
+                </button>
+              </div>
+            ) : (
+              <CTAButtons />
+            )}
+          </div>
+        </header>
+      </>
 
       <main className={styles.main}>
         <div className={styles.cardGrid}>

@@ -46,8 +46,8 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!
     }),
-    KakaoProvider as any,
-    NaverProvider as any
+    // KakaoProvider as any,
+    // NaverProvider as any
   ],
   callbacks: {
     async signIn({ user, account }) {

@@ -12,6 +12,92 @@
   color: #f5f5f7;
 }
 
+/* 로그인 상태 컴팩트 헤더 */
+.compactHeader {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dark .compactHeader {
+  background: rgba(0, 0, 0, 0.82);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.compactInner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.compactTitle {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.compactRhs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.myPageBtn {
+  height: 32px;
+  padding: 0 14px;
+  background: #1d1d1f;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  margin-left: 4px;
+}
+
+.myPageBtn:hover {
+  opacity: 0.75;
+}
+
+.dark .myPageBtn {
+  background: #f5f5f7;
+  color: #1d1d1f;
+}
+
+.logoutBtn {
+  height: 32px;
+  padding: 0 14px;
+  background: none;
+  color: #1d1d1f;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  margin-left: 4px;
+}
+
+.logoutBtn:hover {
+  opacity: 0.6;
+}
+
+.dark .logoutBtn {
+  color: #f5f5f7;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 /* Header */
 .header {
   padding: 80px 0 60px;
@@ -53,8 +139,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   border: none;
   background: none;
   cursor: pointer;
@@ -67,8 +153,8 @@
 }
 
 .iconBtn svg {
-  width: 28px;
-  height: 28px;
+  width: 18px;
+  height: 18px;
 }
 
 .iconBtn:hover {
@@ -305,6 +391,46 @@
     display: flex;
     align-items: center;
     gap: 0;
+  }
+
+  .ctaMobile {
+    height: 32px;
+    padding: 0 14px;
+    background: #1d1d1f;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+
+  .dark .ctaMobile {
+    background: #f5f5f7;
+    color: #1d1d1f;
+  }
+
+  .logoutBtnMobile {
+    height: 32px;
+    padding: 0 12px;
+    background: none;
+    color: #1d1d1f;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-left: 4px;
+  }
+
+  .dark .logoutBtnMobile {
+    color: #f5f5f7;
+    border-color: rgba(255, 255, 255, 0.2);
   }
 
   /* 모바일 헤더 안의 버튼은 본문 헤더와 동일한 크기 */

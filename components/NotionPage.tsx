@@ -28,9 +28,9 @@ import { searchNotion } from '@/lib/search-notion'
 import { useDarkMode } from '@/lib/use-dark-mode'
 
 import { Footer } from './Footer'
-import { GitHubShareButton } from './GitHubShareButton'
 import { Loading } from './Loading'
-import { NotionPageHeader } from './NotionPageHeader'
+import { NotionPageHeader, SiteContext } from './NotionPageHeader'
+import { OverlookedFab } from './OverlookedFab'
 import { Page404 } from './Page404'
 import { PageAside } from './PageAside'
 import { PageHead } from './PageHead'
@@ -196,11 +196,17 @@ const propertyTextValue = (
 const notionRendererComponents: Partial<NotionComponents> = {
   nextLegacyImage: Image,
   nextLink: Link,
-  PageLink: ({ href, children, ...props }: any) => (
-    <Link href={href ?? '/'} {...props}>
-      {children}
-    </Link>
-  ),
+  PageLink: ({ href, children, className, ...props }: any) => {
+    if (!href) return <span className={className} {...props}>{children}</span>
+    // notion-list-item: 행 전체 링크 → <Link>
+    // notion-collection-card: 갤러리 카드 → <Link>
+    // notion-page-link (단독): 행 내부 제목 링크 → <a> 중첩 방지를 위해 <span>
+    const isRowOrCard = className?.includes('notion-list-item') || className?.includes('notion-collection-card')
+    if (isRowOrCard) {
+      return <Link href={href} className={className} {...props}>{children}</Link>
+    }
+    return <span className={className} {...props}>{children}</span>
+  },
   Code,
   Collection,
   Equation,
@@ -298,7 +304,11 @@ export function NotionPage({
     getPageProperty<string>('Description', block, recordMap) ||
     config.description
 
+  const rootHref = `/${site.domain === config.domain ? '' : site.domain}`
+  const isRoot = pageId === site.rootNotionPageId
+
   return (
+    <SiteContext.Provider value={{ name: site.name, rootHref, isRoot, username: site.domain }}>
     <>
       <PageHead
         pageId={pageId}
@@ -338,7 +348,8 @@ export function NotionPage({
         footer={<Footer />}
       />
 
-      <GitHubShareButton />
+      <OverlookedFab />
     </>
+    </SiteContext.Provider>
   )
 }

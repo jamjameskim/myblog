@@ -1,0 +1,115 @@
+.header {
+  margin-bottom: 32px;
+}
+
+.back {
+  display: inline-block;
+  font-size: 13px;
+  color: #6e6e73;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: color 0.15s ease;
+}
+
+.back:hover {
+  color: #1d1d1f;
+}
+
+.readonlyField {
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: #f5f5f7;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.readonlyPrefix {
+  font-size: 14px;
+  color: #6e6e73;
+}
+
+.readonlyValue {
+  font-size: 14px;
+  color: #1d1d1f;
+  font-weight: 500;
+}
+
+.fieldNote {
+  font-size: 12px;
+  color: #aeaeb2;
+  margin: 4px 0 0;
+}
+
+.success {
+  font-size: 13px;
+  color: #34c759;
+  margin: 0;
+}
+
+/* Danger zone */
+.dangerZone {
+  margin-top: 48px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 32px;
+}
+
+.dangerTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0 0 20px;
+}
+
+.dangerItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dangerItem:last-child {
+  border-bottom: none;
+}
+
+.dangerLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1d1d1f;
+  margin: 0 0 4px;
+}
+
+.dangerDesc {
+  font-size: 13px;
+  color: #6e6e73;
+  margin: 0;
+}
+
+.dangerBtn {
+  flex-shrink: 0;
+  height: 34px;
+  padding: 0 14px;
+  background: none;
+  border: 1px solid #ff3b30;
+  border-radius: 8px;
+  color: #ff3b30;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dangerBtn:hover:not(:disabled) {
+  background: #ff3b30;
+  color: #fff;
+}
+
+.dangerBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

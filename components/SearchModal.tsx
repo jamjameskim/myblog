@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import * as React from 'react'
-
 import { rootNotionPageId } from '@/lib/config'
 import { searchNotion } from '@/lib/search-notion'
 import styles from './SearchModal.module.css'
@@ -39,11 +38,16 @@ export function SearchModal({ onClose }: { onClose: () => void }) {
     const timer = setTimeout(async () => {
       try {
         const res = await searchNotion({ query, ancestorId: rootNotionPageId })
-        const items: Result[] = (res.results || []).map((r: any) => ({
-          id: r.id,
-          title: r.title || '제목 없음',
-          url: `/${r.id}`
-        }))
+        const items: Result[] = (res.results || []).map((r: any) => {
+          // highlight.title에서 HTML 태그 제거
+          const rawTitle = r.highlight?.title ?? r.highlights?.titleHighlight ?? ''
+          const title = rawTitle.replace(/<[^>]+>/g, '')
+          return {
+            id: r.id,
+            title: title || '제목 없음',
+            url: `/${r.id}`
+          }
+        })
         setResults(items)
       } catch {
         setResults([])
